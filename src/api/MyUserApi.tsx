@@ -1,27 +1,27 @@
-import { User } from "@/types";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "sonner";
-
+import axios from "axios"
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useGetMyUser = () => {
   const { getAccessTokenSilently } = useAuth0();
-  const getMyUserRequest = async (): Promise<User> => {
+  console.log("kritam")
+  const getMyUserRequest = async() => {
+    console.log("kritam","Inside asycnFunction")
     const accessToken = await getAccessTokenSilently();
-    const response = await fetch(`${API_BASE_URL}/api/v1/user/me`, {
-      method: "GET",
+    const response = await axios.get(`${API_BASE_URL}/api/v1/user/me`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
     });
 
-    if (!response.ok) {
+    if (!response) {
       throw new Error("Failed to fetch user");
     }
 
-    return response.json();
+    return response.data
   };
 
   const {
@@ -47,16 +47,14 @@ export const useCreateMyUser = () => {
   const { getAccessTokenSilently } = useAuth0();
   const createMyUserRequest = async (user: CreateUserRequest) => {
     const accessToken = await getAccessTokenSilently();
-    const response = await fetch(`${API_BASE_URL}/api/v1/user/new`, {
-      method: "POST",
+    const response = await axios.post(`${API_BASE_URL}/api/v1/user/new`,user,{
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user),
     });
 
-    if (!response.ok) {
+    if (!response) {
       throw new Error("Failed to create user");
     }
   };
@@ -88,20 +86,18 @@ export const useUpdateMyUser = () => {
   const updateMyUserRequest = async (formData: UpdateMyUserRequest) => {
     const accessToken = await getAccessTokenSilently();
     console.log(accessToken);
-    const response = await fetch(`${API_BASE_URL}/api/v1/user/me/update`, {
-      method: "PUT",
+    const response = await axios.put(`${API_BASE_URL}/api/v1/user/me/update`, formData,{
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
     });
 
-    if (!response.ok) {
+    if (!response) {
       throw new Error("Failed to update user");
     }
 
-    return response.json();
+    return response.data;
   };
 
   const {
