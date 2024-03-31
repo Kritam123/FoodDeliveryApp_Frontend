@@ -1,6 +1,5 @@
 import { useGetMyUser, useUpdateMyUser } from "@/api/MyUserApi";
 import UserProfileForm from "@/forms/user-profile-form/UserProfileForm";
-import { useEffect } from "react";
 const UserProfilePage = () => {
   const { currentUser, isLoading: isGetLoading } = useGetMyUser();
   const { updateUser, isLoading: isUpdateLoading } = useUpdateMyUser();
