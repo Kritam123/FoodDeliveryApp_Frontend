@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
-const UsernameMenu = ({currentUser}:any) => {
+const UsernameMenu = (currentUser:any) => {
   const { user, logout } = useAuth0();
 
   return (

@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import UsernameMenu from "./UsernameMenu";
 import { Link } from "react-router-dom";
 
-const MainNav = ({currentUser}:any) => {
+const MainNav = (currentUser:any) => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
 
   return (
