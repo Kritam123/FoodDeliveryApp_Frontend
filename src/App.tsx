@@ -5,6 +5,9 @@ import AuthCallbackPage from "./pages/AuthCallbackPage"
 import SearchPage from "./pages/SearchPage"
 import UserProfilePage from "./pages/UserProfilePage"
 import ProtectedRoute from "./auth/ProtectedRoute"
+import DetailPage from "./pages/DetailPage"
+import OrderStatusPage from "./pages/OrderStatusPage"
+import ManageRestaurantPage from "./pages/ManageRestaurantPage"
 
 function App() {
 
@@ -25,7 +28,23 @@ function App() {
             </Layout>
           }
         />
+         <Route
+        path="/detail/:restaurantId"
+        element={
+          <Layout showHero={false}>
+            <DetailPage />
+          </Layout>
+        }
+      />
         <Route element={<ProtectedRoute />}>
+        <Route
+          path="/order-status"
+          element={
+            <Layout>
+              <OrderStatusPage />
+            </Layout>
+          }
+        />
           <Route
             path="/user-profile"
             element={
@@ -34,6 +53,14 @@ function App() {
               </Layout>
             }
           />
+            <Route
+          path="/manage-restaurant"
+          element={
+            <Layout>
+              <ManageRestaurantPage />
+            </Layout>
+          }
+        />
         </Route>
 
         <Route path="*" element={<Navigate to="/" />} />

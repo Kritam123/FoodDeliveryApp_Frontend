@@ -83,7 +83,6 @@ export const useUpdateMyUser = () => {
   const { getAccessTokenSilently } = useAuth0();
   const updateMyUserRequest = async (formData: UpdateMyUserRequest) => {
     const accessToken = await getAccessTokenSilently();
-    console.log(accessToken);
     const response = await axios.put(`${API_BASE_URL}/api/v1/user/me/update`, formData,{
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -94,7 +93,6 @@ export const useUpdateMyUser = () => {
     if (!response) {
       throw new Error("Failed to update user");
     }
-
     return response.data;
   };
 
@@ -109,7 +107,6 @@ export const useUpdateMyUser = () => {
   if (isSuccess) {
     toast.success("User profile updated!");
   }
-
   if (error) {
     toast.error(error.toString());
     reset();
